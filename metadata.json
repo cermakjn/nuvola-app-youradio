@@ -1,0 +1,13 @@
+{
+    "id": "youradio",
+    "name": "Youradio",
+    "maintainer_name": "Jan Čermák",
+    "maintainer_link": "https://jan-cermak.cz",
+    "version_major": 1,
+    "version_minor": 0,
+    "api_major": 3,
+    "api_minor": 0,
+    "categories": "AudioVideo;Audio;",
+    "home_url": "http://www.youradio.cz/"
+}
+
