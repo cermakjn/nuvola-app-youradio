@@ -145,6 +145,18 @@
         }
     };
 
+    /**
+     * @param emitter
+     * @param request
+     * @private
+     */
+    WebApp._onNavigationRequest = function(emitter, request)
+    {
+        if(request.url !== null && request.url.indexOf('www.youradio.cz') === -1) {
+            request.approved = false;
+        }
+    };
+
     WebApp.start();
 
 })(this);  // function(Nuvola)
