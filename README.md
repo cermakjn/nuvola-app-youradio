@@ -7,7 +7,7 @@ Integration of Youradio into your linux desktop via
 Support
 -------
 
-Report bugs and issues at <https://github.com/tiliado/nuvola-app-youradio/issues>.
+Report bugs and issues at <https://github.com/cermakjn/nuvola-app-youradio/issues>.
 
 
 Installation
