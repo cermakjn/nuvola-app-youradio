@@ -24,7 +24,8 @@
 
 "use strict";
 
-(function(Nuvola) {
+(function(Nuvola)
+{
 
     var player = Nuvola.$object(Nuvola.MediaPlayer);
 
@@ -40,7 +41,8 @@
      * @param emitter
      * @private
      */
-    WebApp._onInitWebWorker = function(emitter) {
+    WebApp._onInitWebWorker = function(emitter)
+    {
         Nuvola.WebApp._onInitWebWorker.call(this, emitter);
 
         var state = document.readyState;
@@ -53,11 +55,12 @@
     /**
      * @private
      */
-    WebApp._onPageReady = function() {
-        window.stop_button = document.getElementsByClassName('yr2-navbar-stop')[0];
-        window.play_button = document.getElementsByClassName('yr2-navbar-play')[0];
-        window.pause_button = document.getElementsByClassName('yr2-navbar-pause')[0];
-        window.skip_button = document.getElementsByClassName('yr2-navbar-skip')[0];
+    WebApp._onPageReady = function()
+    {
+        window.stopButton = document.getElementsByClassName('yr2-navbar-stop')[0];
+        window.playButton = document.getElementsByClassName('yr2-navbar-play')[0];
+        window.pauseButton = document.getElementsByClassName('yr2-navbar-pause')[0];
+        window.skipButton = document.getElementsByClassName('yr2-navbar-skip')[0];
 
         // Connect handler for signal ActionActivated
         Nuvola.actions.connect("ActionActivated", this);
@@ -68,10 +71,11 @@
     /**
      * Update
      */
-    WebApp.update = function() {
+    WebApp.update = function()
+    {
         // Playback State
         var state = PlaybackState.UNKNOWN;
-        if(window.stop_button.style.display === 'none' || window.pause_button.classList.contains('active'))
+        if(window.stopButton.style.display === 'none' || window.pauseButton.classList.contains('active'))
             state = PlaybackState.PAUSED;
         else
             state = PlaybackState.PLAYING;
@@ -85,9 +89,9 @@
         };
 
         // Is pause available?
-        window.pause_available = (state === PlaybackState.PLAYING && window.pause_button.style.display !== 'none');
+        window.pauseAvailable = (state === PlaybackState.PLAYING && window.pauseButton.style.display !== 'none');
         // Is pause active?
-        window.pause_active = (state === PlaybackState.PAUSED && window.pause_button.style.display !== 'none' && window.pause_button.classList.contains('active'));
+        window.pauseActive = (state === PlaybackState.PAUSED && window.pauseButton.style.display !== 'none' && window.pauseButton.classList.contains('active'));
 
 
         player.setTrack(track);
@@ -108,34 +112,35 @@
      * @param param
      * @private
      */
-    WebApp._onActionActivated = function(emitter, name, param) {
+    WebApp._onActionActivated = function(emitter, name, param)
+    {
         switch (name) {
             case PlayerAction.TOGGLE_PLAY:
-                if (window.pause_available || window.pause_active) // Playing && pause button is active OR is paused
-                    Nuvola.clickOnElement(window.pause_button);
+                if (window.pauseAvailable || window.pauseActive) // Playing && pause button is active OR is paused
+                    Nuvola.clickOnElement(window.pauseButton);
                 else if (player._state === PlaybackState.PLAYING) // Playing && pause button is not active
-                    Nuvola.clickOnElement(window.stop_button);
+                    Nuvola.clickOnElement(window.stopButton);
                 else // Paused
-                    Nuvola.clickOnElement(window.play_button);
+                    Nuvola.clickOnElement(window.playButton);
 
                 break;
             case PlayerAction.PLAY:
-                if(window.pause_active) // Paused
-                    Nuvola.clickOnElement(window.pause_button);
+                if(window.pauseActive) // Paused
+                    Nuvola.clickOnElement(window.pauseButton);
                 else
-                    Nuvola.clickOnElement(window.play_button);
+                    Nuvola.clickOnElement(window.playButton);
                 break;
             case PlayerAction.PAUSE:
-                if(window.pause_available)
-                    Nuvola.clickOnElement(window.pause_button);
+                if(window.pauseAvailable)
+                    Nuvola.clickOnElement(window.pauseButton);
                 else
-                    Nuvola.clickOnElement(window.stop_button);
+                    Nuvola.clickOnElement(window.stopButton);
                 break;
             case PlayerAction.NEXT_SONG:
-                Nuvola.clickOnElement(window.skip_button);
+                Nuvola.clickOnElement(window.skipButton);
                 break;
             case PlayerAction.STOP:
-                Nuvola.clickOnElement(window.stop_button);
+                Nuvola.clickOnElement(window.stopButton);
                 break;
         }
     };
